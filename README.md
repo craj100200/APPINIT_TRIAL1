@@ -25,3 +25,27 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+Look closely at the following two blocks; both of them are working
+
+//const appInitializerFn = (infoService: InfoService) => {
+//  return () => {
+//    return infoService.loadInfo().then( (promise) => {alert("tete"); return promise } ).then(_ => Promise.resolve(true)).then(_ => alert("tetete"));
+//  };
+//};
+
+
+
+//WORKING APPINITIALIZER FUNCTION
+const appInitializerFn = (infoService: InfoService,  httpClient : HttpClient) => { 
+
+return () => {
+    //return infoService.loadInfo()
+	return Promise.resolve(true)
+	.then( (promise) => {alert("tete"); return promise } )
+	.then(_ => infoService.setConfig(new AppInfo("aaaa")))
+	.then(_ => alert("tetete"));
+  };
+
+}
